@@ -33,32 +33,43 @@ Route::get('/', function () {
 |--------------------------------------------------------------------------
 */
 
-Route::get('/dashboard', function () {
-    return redirect('/admin/dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 /*
 |--------------------------------------------------------------------------
 | Admin CMS Route
 |--------------------------------------------------------------------------
 */
 
-Route::middleware(['auth'])->prefix('admin')->group(function () {
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
 
-    Route::get('/settings', [SettingController::class, 'index'])->name('admin.settings');
+    Route::get('/lembaga', function () {
+        return view('admin.lembaga.index');
+    })->name('lembaga.index');
 
-    Route::get('/lembaga', [LembagaController::class, 'index'])->name('admin.lembaga');
+    Route::get('/berita', function () {
+        return view('admin.berita.index');
+    })->name('berita.index');
 
-    Route::get('/berita', [BeritaController::class, 'index'])->name('admin.berita');
+    Route::get('/prestasi', function () {
+        return view('admin.prestasi.index');
+    })->name('prestasi.index');
 
-    Route::get('/prestasi', [PrestasiController::class, 'index'])->name('admin.prestasi');
+    Route::get('/galeri', function () {
+        return view('admin.galeri.index');
+    })->name('galeri.index');
 
-    Route::get('/galeri', [GaleriController::class, 'index'])->name('admin.galeri');
+    Route::get('/zakat', function () {
+        return view('admin.zakat.index');
+    })->name('zakat.index');
 
-    Route::get('/zakat', [ZakatController::class, 'index'])->name('admin.zakat');
+    Route::get('/settings', function () {
+        return view('admin.settings.index');
+    })->name('setting.index');
 });
+
 
 /*
 |--------------------------------------------------------------------------
